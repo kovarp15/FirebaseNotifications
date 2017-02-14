@@ -14,8 +14,6 @@
 // --- Class definition, inheritance and setup
 // ----------------------------------------------------------------------------
 
-var request = require('request');
-
 function FirebaseModule (id, controller) {
     // Call superconstructor first (AutomationModule)
     FirebaseModule.super_.call(this, id, controller);
@@ -51,7 +49,7 @@ FirebaseModule.prototype.init = function (config) {
             // If API Key from mandrillapp.com and Email exist, then send email
             if (self.config.api_key && self.config.device_id) {
                 console.log("POST: " + "key=" + self.config.api_key);
-                request({
+                http.request({
                     method: 'POST',
                     url: 'https://fcm.googleapis.com/fcm/send',
                     headers: {
