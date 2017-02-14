@@ -54,7 +54,7 @@ FirebaseModule.prototype.init = function (config) {
                     url: "https://fcm.googleapis.com/fcm/send",
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': self.config.api_key
+                        'Authorization': "key=" + self.config.api_key
                     },
                     to: self.config.device_id,
                     data: {
