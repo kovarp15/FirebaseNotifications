@@ -62,10 +62,14 @@ FirebaseModule.prototype.init = function (config) {
                         },
                             "to" : self.config.device_id
                         }
-                    )
-                }, function(res) {
-                    console.log(res.status);
-                    console.log(res.body);
+                    ),
+                    success: function(response) {
+                        console.log(response.status);
+                        console.log(response.body);
+                    },
+                    error: function(response) {
+                        console.log("Can not make request: " + response.statusText); // don't add it to notifications, since it will fill all the notifcations on error
+                    }
                 });
             }
 
