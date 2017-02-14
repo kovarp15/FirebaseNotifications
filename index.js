@@ -48,8 +48,7 @@ FirebaseModule.prototype.init = function (config) {
         handler: function () {
 
             // If API Key from mandrillapp.com and Email exist, then send email
-            //if (typeof self.config.api_key_email !== 'undefined' && typeof self.config.email !== 'undefined') {
-            if (self.config.api_key && self.config.device_id) {
+            /*if (self.config.api_key && self.config.device_id) {
                 http.request({
                     method: 'POST',
                     url: "https://fcm.googleapis.com/fcm/send",
@@ -59,10 +58,10 @@ FirebaseModule.prototype.init = function (config) {
                     },
                     to: self.config.device_id,
                     data: {
-                        "hello":"Hello World"
+                        text:"Hello World"
                     }
                 });
-            }
+            }*/
 
             self.vDev.set("metrics:level", "on"); // update on ourself to allow catch this event
         },
@@ -109,3 +108,7 @@ FirebaseModule.prototype.stop = function () {
 
     FirebaseModule.super_.prototype.stop.call(this);
 };
+
+// ----------------------------------------------------------------------------
+// --- Module methods
+// ----------------------------------------------------------------------------
