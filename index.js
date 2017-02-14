@@ -63,9 +63,10 @@ FirebaseModule.prototype.init = function (config) {
                             "to" : self.config.device_id
                         }
                     ),
+                    async: true,
                     success: function(response) {
-                        console.log(response.status);
-                        console.log(response.body);
+                        console.log("STATUS: \n" + response.status);
+                        console.log("BODY: \n" + response.body);
                     },
                     error: function(response) {
                         console.log("Can not make request: " + response.statusText); // don't add it to notifications, since it will fill all the notifcations on error
