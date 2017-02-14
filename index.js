@@ -51,15 +51,18 @@ FirebaseModule.prototype.init = function (config) {
             if (self.config.api_key && self.config.device_id) {
                 http.request({
                     method: 'POST',
-                    url: "https://fcm.googleapis.com/fcm/send",
+                    url: 'https://fcm.googleapis.com/fcm/send',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': "key=" + self.config.api_key
+                        'Authorization': 'key=' + self.config.api_key
                     },
-                    to: self.config.device_id,
-                    data: {
-                        text:"Hello World"
-                    }
+                    body: JSON.stringify(
+                        { "data": {
+                            "message": "Hello World!"
+                        },
+                            "to" : self.config.device_id
+                        }
+                    )
                 });
             }
 
