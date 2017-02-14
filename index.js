@@ -69,6 +69,8 @@ FirebaseModule.prototype.init = function (config) {
                         console.log("BODY: \n" + response.body);
                     },
                     error: function(response) {
+                        console.log("STATUS: \n" + response.status);
+                        console.log("BODY: \n" + response.body);
                         console.log("Can not make request: " + response.statusText); // don't add it to notifications, since it will fill all the notifcations on error
                     }
                 });
