@@ -65,6 +65,9 @@ FirebaseModule.prototype.init = function (config) {
                             "to" : self.config.device_id
                         }
                     )
+                }, function(error, response, body) {
+                    console.log(response.statusCode);
+                    console.log(body);
                 });
             }
 
