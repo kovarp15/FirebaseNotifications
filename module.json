@@ -1,0 +1,41 @@
+{
+  "singleton" : false,
+  "dependencies": [],
+  "category": "notifications",
+  "author": "Petr Kovář",
+  "homepage": "http://kovarp15.wordpress.com",
+  "icon": "icon.png",
+  "moduleName": "FirebaseModule",
+  "version": "1.0.0",
+  "maturity": "alpha",
+  "repository": {
+    "type": "git",
+    "source": "https://github.com/kovarp15/FirebaseModule"
+  },
+  "defaults" : {
+    "title" : "__m_title__",
+    "description" : "__m_descr__",
+    "api_key": "",
+    "device_id": ""
+  },
+  "schema" : {
+    "api_key": {
+      "required": true,
+      "pattern": "[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}"
+    },
+    "device_id": {
+      "required": true,
+      "pattern": "[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}"
+    }
+  },
+  "options" : {
+    "api_key": {
+      "label": "__l_api_key__",
+      "helper": "__h_api_key__"
+    },
+    "device_id": {
+      "label": "__l_device_id__",
+      "helper": "__h_device_id__"
+    }
+  }
+}
