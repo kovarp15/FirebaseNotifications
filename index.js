@@ -58,7 +58,9 @@ FirebaseModule.prototype.init = function (config) {
                     },
                     data: {
                         to: self.config.device_id,
-                        message: "Hello World!"
+                        data: {
+                            text: "Hello World!"
+                        }
                     },
                     async: true,
                     success: function(response) {
