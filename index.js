@@ -48,7 +48,6 @@ FirebaseModule.prototype.init = function (config) {
 
             // If API Key from mandrillapp.com and Email exist, then send email
             if (self.config.api_key && self.config.device_id) {
-                http.setTimeout(function() {}, 10000);
                 http.request({
                     method: 'POST',
                     url: 'https://fcm.googleapis.com/fcm/send',
@@ -62,6 +61,7 @@ FirebaseModule.prototype.init = function (config) {
                             text: "Hello World!"
                         }
                     }),
+                    timeout: 10000,
                     async: true,
                     success: function(response) {
                         console.log("STATUS: \n" + response.status);
