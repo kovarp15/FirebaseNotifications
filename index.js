@@ -64,11 +64,11 @@ FirebaseModule.prototype.init = function (config) {
                     async: true,
                     success: function(response) {
                         console.log("STATUS: \n" + response.status);
-                        console.log("BODY: \n" + response.body);
+                        console.log("BODY: \n" + response.data);
                     },
                     error: function(response) {
                         console.log("STATUS: \n" + response.status);
-                        console.log("BODY: \n" + response.body);
+                        console.log("BODY: \n" + response.data);
                         console.log("Can not make request: " + response.statusText); // don't add it to notifications, since it will fill all the notifcations on error
                     }
                 });
