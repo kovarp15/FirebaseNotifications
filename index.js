@@ -56,12 +56,12 @@ FirebaseModule.prototype.init = function (config) {
                         'Content-Type': 'application/json',
                         'Authorization': 'key=' + self.config.api_key
                     },
-                    body: {
+                    data: JSON.stringify({
                         to: self.config.device_id,
                         data: {
                             text: "Hello World!"
                         }
-                    },
+                    }),
                     async: true,
                     success: function(response) {
                         console.log("STATUS: \n" + response.status);
@@ -79,34 +79,6 @@ FirebaseModule.prototype.init = function (config) {
         },
         moduleId: this.id
     });
-
-    /*self.vDev = this.controller.devices.create({
-        deviceId: "SecurityZone_"+this.id,
-        defaults: {
-            metrics: {
-                triggeredDevices: [],
-                level: 'off',
-                state: 'off',
-                title: self.langFile.m_title+' '+self.langFile['type_'+self.config.type],
-                icon: self.imagePath+"/icon.png"
-            }
-        },
-        overlay: {
-            metrics: {
-                securityType: self.type
-            },
-            probeType: 'controller_security',
-            deviceType: 'switchBinary'
-        },
-        handler: function(command, args) {
-            if (command !== 'on'
-                && command !== 'off') {
-                return;
-            }
-            self.changeState(command);
-        },
-        moduleId: this.id
-    });*/
 
 };
 
