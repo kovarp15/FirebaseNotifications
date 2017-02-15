@@ -48,8 +48,7 @@ FirebaseModule.prototype.init = function (config) {
 
             // If API Key from mandrillapp.com and Email exist, then send email
             if (self.config.api_key && self.config.device_id) {
-                console.log("POST: " + "key=" + self.config.api_key);
-                console.log("POST: " + "device_id=" + self.config.device_id)
+                console.log("POST: " + "key=" + JSON.stringify({"data": {"message": "Hello World!"}, "to" : self.config.device_id}));
                 http.request({
                     method: 'POST',
                     url: 'https://fcm.googleapis.com/fcm/send',
@@ -58,7 +57,7 @@ FirebaseModule.prototype.init = function (config) {
                         'Content-Type': 'application/json',
                         'Authorization': 'key=' + self.config.api_key
                     },
-                    body: JSON.stringify(
+                    data: JSON.stringify(
                         {
                             "data": {
                                 "message": "Hello World!"
