@@ -52,11 +52,12 @@ FirebaseModule.prototype.init = function (config) {
                 http.request({
                     method: 'POST',
                     url: 'https://fcm.googleapis.com/fcm/send',
+                    contentType: "application/json",
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': 'key=' + self.config.api_key
                     },
-                    body: JSON.stringify(
+                    data: JSON.stringify(
                         { "data": {
                             "message": "Hello World!"
                         },
