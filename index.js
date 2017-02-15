@@ -58,13 +58,12 @@ FirebaseModule.prototype.init = function (config) {
                         'Authorization': 'key=' + self.config.api_key
                     },
                     data: JSON.stringify(
-                        { "data": {
+                        { data: {
                             "message": "Hello World!"
                         },
-                            "to" : self.config.device_id
+                            to : self.config.device_id
                         }
                     ),
-                    to: self.config.device_id,
                     async: true,
                     success: function(response) {
                         console.log("STATUS: \n" + response.status);
