@@ -33,6 +33,8 @@ FirebaseModule.prototype.init = function (config) {
 
     var self = this;
 
+    this.active = true;
+
     this.handler = this.onNotificationHandler();
 
     this.vDev = this.controller.devices.create({
@@ -51,6 +53,8 @@ FirebaseModule.prototype.init = function (config) {
         handler: function (command, args) {
 
             if(command == 'on') {
+
+                self.active = true;
 
                 // If API Key from Firebase and Device ID exist, then send notification
                 if (self.config.api_key && self.config.device_id) {
@@ -81,7 +85,11 @@ FirebaseModule.prototype.init = function (config) {
                     });
                 }
 
+                self.vDev.set("metrics:level", "on");
+
             } else if (command == 'off') {
+
+                self.active = false;
 
                 // If API Key from Firebase and Device ID exist, then send notification
                 if (self.config.api_key && self.config.device_id) {
@@ -112,6 +120,8 @@ FirebaseModule.prototype.init = function (config) {
                     });
                 }
 
+                self.vDev.set("metrics:level", "off");
+
             }
 
             //self.vDev.set("metrics:level", "on"); // update on ourself to allow catch this event
@@ -127,7 +137,7 @@ FirebaseModule.prototype.onNotificationHandler = function () {
     var self = this;
 
     return function(notice) {
-        if (self.config.api_key && self.config.device_id) {
+        if (self.active && self.config.api_key && self.config.device_id) {
             http.request({
                 method: 'POST',
                 url: 'https://fcm.googleapis.com/fcm/send',
