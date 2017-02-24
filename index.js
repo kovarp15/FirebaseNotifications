@@ -45,39 +45,76 @@ FirebaseModule.prototype.init = function (config) {
                 title: 'Firebase ' + this.id
             }
         },
-        overlay: {},
-        handler: function () {
+        overlay: {
+            deviceType: 'switchBinary'
+        },
+        handler: function (command, args) {
 
-            // If API Key from Firebase and Device ID exist, then send notification
-            if (self.config.api_key && self.config.device_id) {
-                http.request({
-                    method: 'POST',
-                    url: 'https://fcm.googleapis.com/fcm/send',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: 'key=' + self.config.api_key
-                    },
-                    data: JSON.stringify({
-                        to: self.config.device_id,
-                        data: {
-                            text: "Hello World!"
+            if(command == 'on') {
+
+                // If API Key from Firebase and Device ID exist, then send notification
+                if (self.config.api_key && self.config.device_id) {
+                    http.request({
+                        method: 'POST',
+                        url: 'https://fcm.googleapis.com/fcm/send',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: 'key=' + self.config.api_key
+                        },
+                        data: JSON.stringify({
+                            to: self.config.device_id,
+                            data: {
+                                text: "Notifications on"
+                            }
+                        }),
+                        timeout: 10000,
+                        async: true,
+                        success: function (response) {
+                            console.log("STATUS: \n" + response.status);
+                            console.log("BODY: \n" + response.data);
+                        },
+                        error: function (response) {
+                            console.log("STATUS: \n" + response.status);
+                            console.log("BODY: \n" + response.data);
+                            console.log("Can not make request: " + response.statusText); // don't add it to notifications, since it will fill all the notifcations on error
                         }
-                    }),
-                    timeout: 10000,
-                    async: true,
-                    success: function(response) {
-                        console.log("STATUS: \n" + response.status);
-                        console.log("BODY: \n" + response.data);
-                    },
-                    error: function(response) {
-                        console.log("STATUS: \n" + response.status);
-                        console.log("BODY: \n" + response.data);
-                        console.log("Can not make request: " + response.statusText); // don't add it to notifications, since it will fill all the notifcations on error
-                    }
-                });
+                    });
+                }
+
+            } else if (command == 'off') {
+
+                // If API Key from Firebase and Device ID exist, then send notification
+                if (self.config.api_key && self.config.device_id) {
+                    http.request({
+                        method: 'POST',
+                        url: 'https://fcm.googleapis.com/fcm/send',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: 'key=' + self.config.api_key
+                        },
+                        data: JSON.stringify({
+                            to: self.config.device_id,
+                            data: {
+                                text: "Notifications off"
+                            }
+                        }),
+                        timeout: 10000,
+                        async: true,
+                        success: function (response) {
+                            console.log("STATUS: \n" + response.status);
+                            console.log("BODY: \n" + response.data);
+                        },
+                        error: function (response) {
+                            console.log("STATUS: \n" + response.status);
+                            console.log("BODY: \n" + response.data);
+                            console.log("Can not make request: " + response.statusText); // don't add it to notifications, since it will fill all the notifcations on error
+                        }
+                    });
+                }
+
             }
 
-            self.vDev.set("metrics:level", "on"); // update on ourself to allow catch this event
+            //self.vDev.set("metrics:level", "on"); // update on ourself to allow catch this event
         },
         moduleId: this.id
     });
