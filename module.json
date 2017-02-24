@@ -1,6 +1,10 @@
 {
   "singleton" : false,
-  "dependencies": [],
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "request": "^2.75.0"
+  },
   "category": "notifications",
   "author": "Petr Kovář",
   "homepage": "http://kovarp15.wordpress.com",

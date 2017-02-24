@@ -33,6 +33,8 @@ FirebaseModule.prototype.init = function (config) {
 
     var self = this;
 
+    var request = require('request');
+
     this.vDev = this.controller.devices.create({
         deviceId: "Firebase_" + this.id,
         defaults: {
