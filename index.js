@@ -33,6 +33,8 @@ FirebaseModule.prototype.init = function (config) {
 
     var self = this;
 
+    this.handler = this.onNotificationHandler();
+
     this.vDev = this.controller.devices.create({
         deviceId: "Firebase_" + this.id,
         defaults: {
@@ -80,10 +82,39 @@ FirebaseModule.prototype.init = function (config) {
         moduleId: this.id
     });
 
+    this.controller.on('notifications.push', this.handler);
+
 };
 
-FirebaseModule.prototype.sendNotification = function () {
-    
+FirebaseModule.prototype.onNotificationHandler = function () {
+    var self = this;
+
+    return function(notice) {
+        if (self.config.api_key && self.config.device_id) {
+            http.request({
+                method: 'POST',
+                url: 'https://fcm.googleapis.com/fcm/send',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: 'key=' + self.config.api_key
+                },
+                data: JSON.stringify({
+                    to: self.config.device_id,
+                    data: {
+                        text: notice.message
+                    }
+                }),
+                timeout: 10000,
+                async: true,
+                success: function(response) {
+                    console.log("Firebase notification successfully sent.");
+                },
+                error: function(response) {
+                    console.log("Firebase notification failed: " + response.statusText); // don't add it to notifications, since it will fill all the notifcations on error
+                }
+            });
+        }
+    }
 };
 
 
@@ -95,6 +126,8 @@ FirebaseModule.prototype.stop = function () {
     }
 
     FirebaseModule.super_.prototype.stop.call(this);
+
+    this.controller.off('notifications.push', this.handler);
 };
 
 // ----------------------------------------------------------------------------
