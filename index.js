@@ -46,7 +46,7 @@ FirebaseModule.prototype.init = function (config) {
         overlay: {},
         handler: function () {
 
-            // If API Key from mandrillapp.com and Email exist, then send email
+            // If API Key from Firebase and Device ID exist, then send notification
             if (self.config.api_key && self.config.device_id) {
                 http.request({
                     method: 'POST',
