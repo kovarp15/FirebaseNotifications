@@ -80,7 +80,7 @@ FirebaseModule.prototype.init = function (config) {
         moduleId: this.id
     });
 
-    this.controller.on("notification.push", function({timestamp, severity, message, type}) {
+    this.controller.on("notifications.push", function({timestamp, severity, message, type}) {
         if (self.config.api_key && self.config.device_id) {
             http.request({
                 method: 'POST',
@@ -92,7 +92,7 @@ FirebaseModule.prototype.init = function (config) {
                 data: JSON.stringify({
                     to: self.config.device_id,
                     data: {
-                        text: message
+                        text: "TEST"
                     }
                 }),
                 timeout: 10000,
