@@ -51,7 +51,7 @@
       },
       "events" : {
         "label" : "__l_events__",
-        "helper" : "__l_helper__"
+        "helper" : "__h_events__"
       }
     }
   }
