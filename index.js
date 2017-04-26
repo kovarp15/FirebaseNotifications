@@ -42,7 +42,7 @@ FirebaseModule.prototype.init = function (config) {
         defaults: {
             deviceType: "toggleButton",
             metrics: {
-                level: 'on', // it is always on, but usefull to allow bind
+                level: 'off',
                 icon: '',
                 title: 'Firebase ' + this.id
             }
@@ -123,13 +123,12 @@ FirebaseModule.prototype.init = function (config) {
                 self.vDev.set("metrics:level", "off");
 
             }
-
-            //self.vDev.set("metrics:level", "on"); // update on ourself to allow catch this event
+            
         },
         moduleId: this.id
     });
 
-    this.controller.on('notifications.push', this.handler);
+    this.controller.on('security.*', this.handler);
 
 };
 
@@ -174,7 +173,7 @@ FirebaseModule.prototype.stop = function () {
 
     FirebaseModule.super_.prototype.stop.call(this);
 
-    this.controller.off('notifications.push', this.handler);
+    this.controller.off('security.*', this.handler);
 };
 
 // ----------------------------------------------------------------------------
