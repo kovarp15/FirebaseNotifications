@@ -128,7 +128,7 @@ FirebaseModule.prototype.init = function (config) {
         moduleId: this.id
     });
 
-    this.controller.on('security.*', this.handler);
+    this.controller.on('security', this.handler);
 
 };
 
@@ -173,7 +173,7 @@ FirebaseModule.prototype.stop = function () {
 
     FirebaseModule.super_.prototype.stop.call(this);
 
-    this.controller.off('security.*', this.handler);
+    this.controller.off('security', this.handler);
 };
 
 // ----------------------------------------------------------------------------
