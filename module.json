@@ -26,6 +26,15 @@
       },
       "device_id": {
         "required": true
+      },
+      "events" : {
+        "items" : {
+          "required" : true,
+          "type" : "string"
+        },
+        "minItems" : 1,
+        "type" : "array",
+        "uniqueItems" : true
       }
     },
     "required": false
@@ -39,6 +48,10 @@
       "device_id": {
         "label": "__l_device_id__",
         "helper": "__h_device_id__"
+      },
+      "events" : {
+        "label" : "__l_events__",
+        "helper" : "__l_helper__"
       }
     }
   }

@@ -128,7 +128,11 @@ FirebaseModule.prototype.init = function (config) {
         moduleId: this.id
     });
 
-    this.controller.on('security.intrusion.alarm', this.handler);
+    //this.controller.on('security.intrusion.alarm', this.handler);
+
+    _.each(self.config.events,function(eventName) {
+        self.controller.on(eventName, self.handler);
+    });
 
 };
 
@@ -173,7 +177,11 @@ FirebaseModule.prototype.stop = function () {
 
     FirebaseModule.super_.prototype.stop.call(this);
 
-    this.controller.off('security.intrusion.alarm', this.handler);
+    _.each(self.config.events,function(eventName) {
+        self.controller.off(eventName, self.callbackEvent);
+    });
+
+    //this.controller.off('security.intrusion.alarm', this.handler);
 };
 
 // ----------------------------------------------------------------------------
